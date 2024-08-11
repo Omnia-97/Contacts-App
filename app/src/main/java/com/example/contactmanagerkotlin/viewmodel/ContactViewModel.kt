@@ -31,11 +31,11 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
         clearOrDeleteButtonText.value = "Clear All"
     }
 
-    fun insert(contact: Contacts) = viewModelScope.launch {
+    private fun insert(contact: Contacts) = viewModelScope.launch {
         repository.insert(contact)
     }
 
-    fun delete(contact: Contacts) = viewModelScope.launch {
+    private fun delete(contact: Contacts) = viewModelScope.launch {
         repository.delete(contact)
         inputName.value = null
         inputEmail.value = null
@@ -44,7 +44,7 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
         clearOrDeleteButtonText.value = "Clear All"
     }
 
-    fun update(contact: Contacts) = viewModelScope.launch {
+    private fun update(contact: Contacts) = viewModelScope.launch {
         repository.update(contact)
         inputName.value = null
         inputEmail.value = null
@@ -53,7 +53,7 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
         clearOrDeleteButtonText.value = "Clear All"
     }
 
-    fun clearAll() = viewModelScope.launch {
+    private fun clearAll() = viewModelScope.launch {
         repository.deleteAll()
     }
 
@@ -90,11 +90,11 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("Not yet implemented")
+
     }
 
 }
