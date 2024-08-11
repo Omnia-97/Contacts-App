@@ -14,7 +14,7 @@ class ContactRepository(private val contactDAO: ContactDAO) {
     suspend fun delete(contact: Contacts) {
         return contactDAO.deleteContact(contact)
     }
-    suspend fun deleteAll(contact: Contacts) {
+    suspend fun deleteAll() {
         return contactDAO.deleteAllContacts()
     }
 }
