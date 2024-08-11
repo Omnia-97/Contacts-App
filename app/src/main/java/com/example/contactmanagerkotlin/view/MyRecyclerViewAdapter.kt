@@ -16,22 +16,22 @@ class MyRecyclerViewAdapter(
 
 
     class MyViewHolder(var binding: CardItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(contact : Contacts , clickListener: (Contacts) -> Unit){
+        fun bind(contact: Contacts, clickListener: (Contacts) -> Unit) {
             binding.nameTextView.text = contact.contact_name
             binding.emailTextView.text = contact.contact_email
-            binding.listItemLayout.setOnClickListener{
+            binding.listItemLayout.setOnClickListener {
                 clickListener(contact)
+
+            }
 
         }
 
+
     }
-
-
-}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding : CardItemBinding = DataBindingUtil.inflate(
+        val binding: CardItemBinding = DataBindingUtil.inflate(
             layoutInflater,
             R.layout.card_item,
             parent,
@@ -41,12 +41,12 @@ class MyRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return  contactList.size
+        return contactList.size
 
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(contactList[position] , clickListener)
+        holder.bind(contactList[position], clickListener)
 
     }
 }

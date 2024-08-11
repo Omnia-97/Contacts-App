@@ -13,6 +13,7 @@ import com.example.contactmanagerkotlin.room.ContactDataBase
 import com.example.contactmanagerkotlin.room.Contacts
 import com.example.contactmanagerkotlin.view.MyRecyclerViewAdapter
 import com.example.contactmanagerkotlin.viewmodel.ContactViewModel
+import com.example.contactmanagerkotlin.viewmodel.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,9 +23,12 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val doa = ContactDataBase.getInstance(applicationContext).contactDAO
         val repository = ContactRepository(doa)
+        val factory = ViewModelFactory(repository)
         contactViewModel = ViewModelProvider(
             this,
-        ).get(ContactViewModel::class.java)
+            factory
+        )
+            .get(ContactViewModel::class.java)
         binding.contactViewModel = contactViewModel
         binding.lifecycleOwner = this
         initRecyclerView()
@@ -45,9 +49,11 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun listItemClicked(selectedItem : Contacts) {
-        Toast.makeText(this , "selected name is ${selectedItem.contact_name}" ,
-            Toast.LENGTH_LONG).show()
+    private fun listItemClicked(selectedItem: Contacts) {
+        Toast.makeText(
+            this, "selected name is ${selectedItem.contact_name}",
+            Toast.LENGTH_LONG
+        ).show()
         contactViewModel.initUpdateOrDelete(selectedItem)
 
     }
