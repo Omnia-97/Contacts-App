@@ -3,6 +3,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="contactViewModel"
+            type="com.example.contactmanagerkotlin.viewmodel.ContactViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:text="@={contactViewModel.inputName}"
                 android:id="@+id/name_ET"
                 android:layout_width="150dp"
                 android:layout_height="55dp"
@@ -30,6 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
+                android:text="@={contactViewModel.inputEmail}"
                 android:id="@+id/email_ET"
                 android:layout_width="150dp"
                 android:layout_height="55dp"
@@ -41,17 +48,20 @@
 
             <Button
                 android:id="@+id/button1"
+                android:onClick="@{()-> contactViewModel.saveOrUpdate()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="16dp"
+                android:text="@={contactViewModel.saveOrUpdateButtonText}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/email_ET" />
 
             <Button
+                android:onClick="@{() -> contactViewModel.clearAllOrDelete()}"
+                android:text="@={contactViewModel.clearOrDeleteButtonText}"
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
