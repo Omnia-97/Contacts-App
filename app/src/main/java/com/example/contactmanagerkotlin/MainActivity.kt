@@ -1,6 +1,7 @@
 package com.example.contactmanagerkotlin
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactmanagerkotlin.databinding.ActivityMainBinding
 import com.example.contactmanagerkotlin.repo.ContactRepository
 import com.example.contactmanagerkotlin.room.ContactDataBase
+import com.example.contactmanagerkotlin.room.Contacts
+import com.example.contactmanagerkotlin.view.MyRecyclerViewAdapter
 import com.example.contactmanagerkotlin.viewmodel.ContactViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -33,9 +36,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayUsersList() {
-        contactViewModel.users.observe(this , Observer {
-            binding.recyclerView.adapter =
+        contactViewModel.users.observe(this, Observer {
+            binding.recyclerView.adapter = MyRecyclerViewAdapter(
+                it,
+                { selectedItem: Contacts -> listItemClicked(selectedItem) }
+            )
 
         })
+    }
+
+    private fun listItemClicked(selectedItem : Contacts) {
+        Toast.makeText(this , "selected name is ${selectedItem.contact_name}" ,
+            Toast.LENGTH_LONG).show()
+        contactViewModel.initUpdateOrDelete(selectedItem)
+
     }
 }
